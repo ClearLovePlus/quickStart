@@ -1,0 +1,22 @@
+server:
+  port: 8887
+
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.topsperity.push.**.domain,com.topsperity.push.**.po
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:topsperity/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+  global-config:
+    worker-id: ${random.int(1,31)}
+    datacenter-id: ${random.int(1,31)}
+

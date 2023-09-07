@@ -1,0 +1,52 @@
+server:
+  port: 8887
+
+spring:
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+  datasource:
+    dynamic: # 多数据源配置
+      primary: dap_push
+      strict: false
+      datasource:
+        # 创新库
+        dap_push:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://172.17.66.93:3306/dap_push?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&
+          username: sitdbuser
+          password: Topsperity54@sit
+          hikari:
+            min-idle: 10
+            idle-timeout: 10000
+            max-pool-size: 50
+            is-auto-commit: true
+            max-lifetime: 60000
+            connection-timeout: 5000
+
+http:
+  connectTimeout: PT60S
+  readTimeout: PT60S
+  connectionRequestTimeout: PT60S
+  maxConnTotal: 50
+  maxConnPerRoute: 50
+
+magic:
+  url: http://172.16.192.21:38313
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGllbnQtaWQiOiJ6aXlpbmciLCJjdXJyZW50LXRpbWUiOjE2ODk1NjUwNzY3MjV9.YfI-Syp38WoKy2sAmcTU7L4CdkD49lQXcOHwxwO6zEI
+
+dap:
+  error:
+    url: http://localhost:9002/no-permission
+  redirect:
+    account:
+       url: http://localhost:9002/home?typeCode=%s&oaAccount=%s&dicValue=流通股本不同
+    phone:
+       url: http://localhost:9002/home?typeCode=%s&phoneNum=%s&dicValue=流通股本不同
+  ignore:
+    code: datacompare;test
+
+
+
+

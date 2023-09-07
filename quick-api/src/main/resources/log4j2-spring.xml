@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="KAFKA_SERVERS">${ctx:log4j2.kafka.hosts}</Property>
+        <Property name="SERVICE_NAME">${ctx:spring.application.name}</Property>
+        <Property name="PROJECT_NAME">${ctx:spring.application.name}</Property>
+        <Property name="KAFKA_LOG_ENABLED">${ctx:log4j2.kafka.enabled}</Property>
+        <Property name="PROFILE">${ctx:profile}</Property>
+        <Property name="IP">${ctx:current.ip}</Property>
+        <property name="LOG_HOME">logs/${ctx:spring.application.name}</property>
+        <property name="CONSOLE_LOG_PATTERN"
+                  value="[%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export}],%highlight{%d{HH:mm:ss.SSS} [%traceId] [%10t] %-5p %logger{36}:%L - %msg%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=cyan,TRACE=blue}"/>
+
+        <property name="FILE_LOG_PATTERN"
+                  value="=======LOG BEGIN====== %d{yyyy-MM-dd HH:mm:ss.SSSZ}: [%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export}],%highlight{[%traceId] [%10t] %-5p %logger{36}:%L - %msg%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=cyan,TRACE=blue}"/>
+
+    </Properties>
+
+    <Appenders>
+        <KafkaAppender name="Kafka" topic="${PROJECT_NAME}" syncSend="true" ignoreExceptions="false">
+            <JsonPatternLayout projectName="${PROJECT_NAME}" serviceName="${SERVICE_NAME}" profile="${PROFILE}"
+                               ip="${IP}"/>
+            <Property name="bootstrap.servers">${KAFKA_SERVERS}</Property>
+            <Property name="acks">0</Property>
+            <Property name="enabled">${KAFKA_LOG_ENABLED}</Property>
+            <Property name="max.block.ms">2000</Property>
+        </KafkaAppender>
+
+        <Failover name="Failover" primary="Kafka" retryIntervalSeconds="60">
+            <Failovers>
+                <AppenderRef ref="Console"/>
+            </Failovers>
+        </Failover>
+
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout disableAnsi="false" pattern="${CONSOLE_LOG_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="File-Error"
+                     filename="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}.log"
+                     append="true">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="File-Warn"
+                     filename="${LOG_HOME}/warn.log" filePattern="${LOG_HOME}/warn-%d{yyyy-MM-dd}.log"
+                     append="true">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="File-Info"
+                     filename="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}.log"
+                     append="true">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info" includeLocation="false" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Failover"/>
+            <AppenderRef ref="File-Error"/>
+            <AppenderRef ref="File-Warn"/>
+            <AppenderRef ref="File-Info"/>
+        </Root>
+
+        <Logger name="org.apache.kafka" level="info" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Failover"/>
+        </Logger>
+        <Logger name="org.apache.kafka.clients.Metadata" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Failover"/>
+        </Logger>
+        <Logger name="org.springframework" level="warn" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Failover"/>
+        </Logger>
+        <Logger name="com.alibaba" level="info" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Failover"/>
+        </Logger>
+        <Logger name="io.lettuce.core.protocol" level="warn" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Failover"/>
+        </Logger>
+    </Loggers>
+</Configuration>

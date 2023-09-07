@@ -1,0 +1,142 @@
+nodeId: 0
+server:
+  servlet:
+    context-path: /
+  port: 8887
+management:
+  server:
+    port: ${MANAGE_PORT:50001}
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: ${MANAGE_ENDPOINTS:*}
+logging:
+  config: classpath:log4j2-spring.xml
+spring:
+  profiles:
+    active: local
+  banner:
+    location: banner.txt
+  application:
+    name: quick-api
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+#  config:
+#    import: nacos
+
+---
+log4j2:
+  kafka:
+    enabled: false
+logging:
+  config: classpath:log4j2-dev.xml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        watch:
+          enabled: false
+        register-enabled: false
+      config:
+        enabled: false
+  config:
+    activate:
+      on-profile: local
+  main:
+    lazy-initialization: true
+---
+#log4j2:
+#  kafka:
+#    enabled: false
+logging:
+  config: classpath:log4j2-spring.xml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: DEFAULT_GROUP
+        namespace: ${NACOS_NAMESPACE:ac3a6240-dc51-4d6b-9e97-86c5a92a75b1}
+        server-addr: 123.56.164.61:8848
+      config:
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        namespace: ${NACOS_NAMESPACE:ac3a6240-dc51-4d6b-9e97-86c5a92a75b1}
+        server-addr: 123.56.164.61:8848
+  config:
+    activate:
+      on-profile: dev
+
+---
+log4j2:
+  kafka:
+    enabled: false
+logging:
+  config: classpath:log4j2-dev.xml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: online
+        namespace: ${NACOS_NAMESPACE:00cd1ea4-ba65-4664-83ba-cca6fe120e0b}
+        server-addr: ${NACOS_SERVERADDR}
+      config:
+        group: online
+        file-extension: yaml
+        namespace: ${NACOS_NAMESPACE:00cd1ea4-ba65-4664-83ba-cca6fe120e0b}
+        server-addr: ${NACOS_SERVERADDR}
+  config:
+    activate:
+      on-profile: sit
+
+---
+log4j2:
+  kafka:
+    enabled: false
+logging:
+  config: classpath:log4j2-dev.xml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: online
+        namespace: ${NACOS_NAMESPACE:1eca61aa-effb-496f-aa6a-8facf6a95ff3}
+        server-addr: ${NACOS_SERVERADDR}
+      config:
+        group: online
+        file-extension: yaml
+        namespace: ${NACOS_NAMESPACE:1eca61aa-effb-496f-aa6a-8facf6a95ff3}
+        server-addr: ${NACOS_SERVERADDR}
+  config:
+    activate:
+      on-profile: uat
+
+---
+log4j2:
+  kafka:
+    enabled: true
+    hosts: 10.21.4.29:9092,10.21.4.39:9092,10.21.4.49:9092
+#  因为log4j2的特殊性，不能存在log4j2-test.xml,这种配置会被任一环境给读取到。所以使用log4j2-spring.xml
+logging:
+  config: classpath:log4j2-spring.xml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: online
+        namespace: ${NACOS_NAMESPACE:b6c58033-e88d-46dc-9423-76f3f17fed12}
+        server-addr: ${NACOS_SERVERADDR}
+      config:
+        group: online
+        file-extension: yaml
+        namespace: ${NACOS_NAMESPACE:b6c58033-e88d-46dc-9423-76f3f17fed12}
+        server-addr: ${NACOS_SERVERADDR}
+      username: totsitg
+      password: landing123456
+  config:
+    activate:
+      on-profile: prd
