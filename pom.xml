@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>quick-api</module>
         <module>quick-common</module>
+        <module>quick-demo</module>
     </modules>
 
     <properties>
