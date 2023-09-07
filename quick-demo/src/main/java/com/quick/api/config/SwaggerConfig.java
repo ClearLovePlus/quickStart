@@ -36,8 +36,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("数据资产平台定制化推送中心")
-                .description("数据资产平台定制化推送中心")
+                .title("后端快速搭建框架")
+                .description("后端快速搭建框架")
                 .build();
     }
 }

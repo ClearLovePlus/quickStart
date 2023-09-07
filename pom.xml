@@ -63,10 +63,22 @@
         <easyexcel.version>3.3.2</easyexcel.version>
         <dingtalk.version>1.0.1</dingtalk.version>
         <xxl.version>2.3.0</xxl.version>
+        <amqp.version>2.0.5.RELEASE</amqp.version>
     </properties>
 
     <dependencyManagement>
+
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-amqp</artifactId>
+                <version>${amqp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>2.0.5.RELEASE</version>
+            </dependency>
             <!--单元测试相关-->
             <dependency>
                 <groupId>junit</groupId>
@@ -94,11 +106,6 @@
                 <version>${fastjson.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -256,13 +263,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
@@ -271,16 +271,6 @@
             </dependency>
 
             <!--            mybatis相关-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
@@ -320,6 +310,11 @@
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.summer</groupId>
+                <artifactId>quick-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
 

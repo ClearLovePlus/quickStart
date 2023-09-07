@@ -24,6 +24,11 @@ spring:
             is-auto-commit: true
             max-lifetime: 60000
             connection-timeout: 5000
+  rabbitmq:
+    host: 192.168.83.33
+    port: 5672
+    username: admin
+    password: 2wsx@WSX
 
 http:
   connectTimeout: PT60S

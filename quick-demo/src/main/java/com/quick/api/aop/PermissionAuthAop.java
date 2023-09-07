@@ -6,7 +6,7 @@ import com.quick.api.repository.mapper.po.TPushType;
 import com.quick.api.repository.mapper.po.TPushWhiteList;
 import com.quick.api.service.IPushTypeService;
 import com.quick.api.service.IPushWhiteListService;
-import com.topsperity.common.util.ArrayUtils;
+import com.summer.common.util.ArrayUtils;
 import com.quick.api.common.ReturnCodeEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
