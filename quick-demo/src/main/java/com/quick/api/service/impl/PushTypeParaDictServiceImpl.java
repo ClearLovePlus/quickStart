@@ -2,10 +2,10 @@ package com.quick.api.service.impl;
 
 import com.quick.api.repository.TPushParaDictRepository;
 import com.quick.api.repository.mapper.po.TPushParaDict;
-import com.topsperity.common.dto.Resp;
 import com.quick.api.common.ReturnCodeEnum;
 import com.quick.api.dto.ParaDictResponseDTO;
 import com.quick.api.service.IPushTypeParaDictService;
+import com.summer.common.dto.Resp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -24,11 +24,12 @@ spring:
             is-auto-commit: true
             max-lifetime: 60000
             connection-timeout: 5000
-  rabbitmq:
-    host: 192.168.83.33
-    port: 5672
-    username: admin
-    password: 2wsx@WSX
+  redis:
+    sentinel:
+      master: itgmaster
+      nodes: 172.17.66.148:26379,172.17.66.165:26379,172.17.66.65:26379
+    password: Tebonitg@202109
+    database: 11
 
 http:
   connectTimeout: PT60S
@@ -51,6 +52,10 @@ dap:
        url: http://localhost:9002/home?typeCode=%s&phoneNum=%s&dicValue=流通股本不同
   ignore:
     code: datacompare;test
+
+kafka:
+  address: 192.168.246.55:9092
+  groupId: test-group
 
 
 

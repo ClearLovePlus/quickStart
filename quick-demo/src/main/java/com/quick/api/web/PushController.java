@@ -6,7 +6,7 @@ import com.quick.api.dto.OaUser;
 import com.quick.api.dto.PushContentResponseDTO;
 import com.quick.api.service.IPushTypeService;
 import com.quick.api.service.IPushWhiteListService;
-import com.topsperity.common.dto.Resp;
+import com.summer.common.dto.Resp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.quick.api.service;
 
-import com.topsperity.common.dto.Resp;
 import com.quick.api.dto.DiffTypeDetailResponseDTO;
+import com.summer.common.dto.Resp;
 
 import java.util.List;
 

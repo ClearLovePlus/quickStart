@@ -1,9 +1,9 @@
 package com.quick.api.service;
 
 import com.quick.api.repository.mapper.po.TPushType;
-import com.topsperity.common.dto.Resp;
 import com.quick.api.dto.DiffTypeDetailResponseDTO;
 import com.quick.api.dto.PushContentResponseDTO;
+import com.summer.common.dto.Resp;
 
 /**
  * @description:

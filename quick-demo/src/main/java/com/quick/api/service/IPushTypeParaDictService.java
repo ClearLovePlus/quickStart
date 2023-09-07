@@ -1,6 +1,6 @@
 package com.quick.api.service;
 
-import com.topsperity.common.dto.Resp;
+import com.summer.common.dto.Resp;
 import com.quick.api.dto.ParaDictResponseDTO;
 
 import java.util.List;
@@ -17,5 +17,5 @@ public interface IPushTypeParaDictService {
      * @param paraId
      * @return
      */
-    Resp<List<ParaDictResponseDTO>> getDictByTypeIdAndParaId(Integer typeId,Integer paraId);
+    Resp<List<ParaDictResponseDTO>> getDictByTypeIdAndParaId(Integer typeId, Integer paraId);
 }

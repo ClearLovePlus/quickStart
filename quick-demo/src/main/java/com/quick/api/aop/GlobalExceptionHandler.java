@@ -1,7 +1,7 @@
 package com.quick.api.aop;
 
-import com.topsperity.common.dto.Resp;
-import com.topsperity.common.exceptions.DapException;
+import com.summer.common.dto.Resp;
+import com.summer.common.exceptions.DapException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

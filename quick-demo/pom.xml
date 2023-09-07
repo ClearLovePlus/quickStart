@@ -32,7 +32,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!--mysql 驱动-->
         <dependency>
             <groupId>mysql</groupId>
